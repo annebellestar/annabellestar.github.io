@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.96.0" />
+
+
+<title>Sad St Mary&#39;s - Anne&#39;s Sports Blog</title>
+<meta property="og:title" content="Sad St Mary&#39;s - Anne&#39;s Sports Blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Sad St Mary&#39;s</h1>
+
+    
+    <span class="article-date">2022-04-04</span>
+    
+
+    <div class="article-content">
+      <p>Hello there. If you participated in the NCAA tournament this year, chances are, you <em>probably</em> didn&rsquo;t choose St Mary&rsquo;s to win it all. In fact, I bet most people don&rsquo;t even know where St Mary&rsquo;s is located. I sure as heck didn&rsquo;t.</p>
+<p>Alas, St Mary&rsquo;s is who I inevitably picked to win it all for this year&rsquo;s 2022 NCAA Bracket Challenge. Yes, the one everyone submits to ESPN. The one that actually has prize money (and horrendous bragging rights) attached.</p>
+<p>If you&rsquo;re wondering why I picked St Mary&rsquo;s to win it all (over Seton Hall, no less), do keep reading.</p>
+<p>There&rsquo;s a few reasons why you might think I picked St Mary&rsquo;s:</p>
+<p>I don&rsquo;t follow NCAA basketball.</p>
+<p>I went to St Mary&rsquo;s for education.</p>
+<p>I believe in miracles.</p>
+<p>I was using a computational algorithm based on advanced statistics that somehow spit out St Mary&rsquo;s as your 2022 NCAA Men&rsquo;s Basketball Champion.</p>
+<p>If you guess the last one, hooray. Have an air high-five.</p>
+<p>So basically, I used a coding programme to run an algorithm and statistics-based formula that I thought would correctly predict the NCAA tourney winner this year.</p>
+<p>I ran three different factors:</p>
+<p>• PIE, or Player Impact Efficiency (this is a statistic I stole from the NBA that measures &hellip; a lot of stuff. The formula for PIE is complicated and long)</p>
+<p>This statistic analyses what % of certain calculated game events that team achieve (these statistics are the traditional statistics of Points, Rebounds, Assists, and Turnover Percentage). If their PIE is above 50% then they have a good chance of winning the game. The formula for this statistic is as follows: (PTS + FGM + FTM - FGA - FTA + DREB + (.5 * OREB) + AST + STL + (.5 * BLK) - PF - TO) / (GmPTS + GmFGM + GmFTM - GmFGA - GmFTA + GmDREB + (.5 * GmOREB) + GmAST + GmSTL + (.5 * GmBLK) - GmPF - GmTO).</p>
+<p>• Adjusted Offense (a statistic that measures how many points per 100 possessions)</p>
+<p>• Adjusted Defense (a statistic that measures how many points against per 100 possesions by the opponent)</p>
+<p>You can take a look at my code below:</p>
+<p>teamstats &lt;- teamgames %&gt;%
+group_by(team_short_display_name, season) %&gt;%
+arrange(game_date) %&gt;%
+mutate(
+team_score = ((field_goals_made-three_point_field_goals_made) * 2) + (three_point_field_goals_made*3) + free_throws_made,
+team_pie_numerator = (team_score + field_goals_made + free_throws_made - field_goals_attempted - free_throws_attempted + defensive_rebounds + (.5 * offensive_rebounds) + assists + steals + (.5 * blocks) - fouls - turnovers),
+) %&gt;% ungroup() %&gt;% rename(
+team_adj_o = adj_o,
+team_adj_d = adj_d
+)</p>
+<p>Turns out these weren&rsquo;t the best factors to use when calculating NCAA matchups (or at least the ones this year).</p>
+<p>I think where I mostly went wrong was the PIE statistic.</p>
+<p>Why?
+The NCAA is not the NBA.</p>
+<p>Because of the complexity of the formula, I believe that PIE is a statistic that really works with teams that either score a lot, have a small margin of error, and have a more consistent play.</p>
+<p>I also failed to add in any of the traditional statistic such as Rebounds, Field Goal Percentage, and Shooting Percentage.</p>
+<p>There&rsquo;s not much to say why my brackets performed the way they did, but unfortunately that&rsquo;s just how the ball rolls sometimes.</p>
+<p>Maybe next year I&rsquo;ll find a way to tweak my predictions and win it all.</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+
